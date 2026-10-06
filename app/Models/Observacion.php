@@ -21,7 +21,7 @@ class Observacion extends Model
 
     public function organizacion()
     {
-        return $this->belongsTo(Organizacion::class, 'organizacion_id');
+        return $this->belongsTo(Organizacion::class);
     }
 
     public function respuestas()

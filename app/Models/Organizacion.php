@@ -7,15 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Organizacion extends Model
 {
     protected $table = 'organizaciones';
-    protected $fillable = ['nombre', 'descripcion'];
+    protected $fillable = ['nombre', 'descripcion', 'activo'];
 
     public function usuarios()
     {
         return $this->hasMany(User::class, 'organizacion_id');
-    }
-
-    public function observaciones()
-    {
-        return $this->hasMany(Observacion::class);
     }
 }

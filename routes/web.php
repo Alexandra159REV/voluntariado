@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DocumentoController;
-
-use App\Http\Controllers\Gobierno\IniciativaController;
+use App\Http\Controllers\Gobierno\RevisarIniciativaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Gobierno\OrganizacionController;
-
+use App\Http\Controllers\ArticuloController;
+use App\Http\Controllers\ObservacionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -60,4 +60,18 @@ Route::get('/organizaciones', function () {
 Route::get('/emitir-dictamen', [App\Http\Controllers\Gobierno\DictamenController::class, 'create'])->name('dictamen.create');
 
 Route::get('/iniciativas', [IniciativaController::class, 'index'])->name('iniciativas.index');
+
+
+// Rutas para Organizaciones dentro del panel de gobierno
+Route::get('/gobierno/organizaciones/create', [OrganizacionController::class, 'create'])->name('gobierno.organizaciones.create');
+Route::post('/gobierno/organizaciones', [OrganizacionController::class, 'store'])->name('gobierno.organizaciones.store');
+Route::get('/gobierno/revisariniciativa', [RrevisariniciativaController::class, 'index'])->name('gobierno.revisariniciativa.index');
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/articulos/{articulo}', [ArticuloController::class, 'show'])->name('articulos.show');
+    Route::post('/articulos/{articulo}/observaciones', [ObservacionController::class, 'store'])->name('observaciones.store');
+});
+
 require __DIR__.'/auth.php';

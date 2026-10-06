@@ -51,9 +51,16 @@ class User extends Authenticatable
 
     // Relación: Un usuario pertenece a una organización
     public function organizacion()
+
     {
         return $this->belongsTo(Organizacion::class, 'organizacion_id');
     }
+
+    public function observaciones()
+    {
+        return $this->hasMany(Observacion::class, 'user_id');
+    }
+
 
     // Método para verificar si es del gobierno
     public function esGobierno()
@@ -66,4 +73,7 @@ class User extends Authenticatable
     {
         return $this->rol === 'organizacion';
     }
+
+   
+    
 }
